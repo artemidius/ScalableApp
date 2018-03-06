@@ -2,6 +2,7 @@ package com.tomtom.tom.scalableapp.main
 
 import android.util.Log
 import com.tomtom.tom.data.BackendRepo
+import com.tomtom.tom.data.RealmRepo
 import com.tomtom.tom.domain.Interactor
 import com.tomtom.tom.domain.RetrieveUserReposUseCase
 import com.tomtom.tom.domain.RetrieveUserReposUseCaseImpl
@@ -15,6 +16,16 @@ class MainActivityPresenterImpl(mainActivity: MainActivity):MainActivityContract
             Log.d(tag, "ID: ${repo.id}; Name: ${repo.name}")
         }
         view.updateScreen(repos)
+
+        val realmRepo = RealmRepo()
+        realmRepo.deleteAllRepos()
+
+        for (repo in repos) {
+            realmRepo.saveRepository(repo)
+
+        }
+
+        Log.d(tag, "We have ${realmRepo.getAllRepos()!!.size} repos in DB")
     }
 
     val tag = this.javaClass.simpleName
@@ -27,6 +38,7 @@ class MainActivityPresenterImpl(mainActivity: MainActivity):MainActivityContract
     override fun onResume()   {
         Log.d(tag, "Activity triggered onResume()")
         val boundary = this
+
         Thread {
             retrieveReposUseCase.run(constantUser, dataInteractor, boundary)
         }.start()
