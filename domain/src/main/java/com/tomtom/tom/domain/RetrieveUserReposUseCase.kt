@@ -1,5 +1,8 @@
 package com.tomtom.tom.domain
 
 interface RetrieveUserReposUseCase {
-    fun run(name: String, dataInteractor: Interactor.Data, presentationInteractor: Interactor.Presentation)
+    fun run(name: String,
+            backendInteractor: Interactor.Backend,
+            presentationInteractor: Interactor.Presentation,
+            databaseInteractor: Interactor.DataBase)
 }

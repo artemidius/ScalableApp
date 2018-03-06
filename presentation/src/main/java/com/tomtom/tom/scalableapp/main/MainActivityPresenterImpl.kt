@@ -22,7 +22,6 @@ class MainActivityPresenterImpl(mainActivity: MainActivity):MainActivityContract
 
         for (repo in repos) {
             realmRepo.saveRepository(repo)
-
         }
 
         Log.d(tag, "We have ${realmRepo.getAllRepos()!!.size} repos in DB")
@@ -31,7 +30,8 @@ class MainActivityPresenterImpl(mainActivity: MainActivity):MainActivityContract
     val tag = this.javaClass.simpleName
     val constantUser = "mralexgray"
     val view:MainActivityContract.View = mainActivity
-    val dataInteractor:Interactor.Data = BackendRepo()
+    val backendInteractor:Interactor.Backend = BackendRepo()
+    val databaseInteractor: Interactor.DataBase = RealmRepo()
 
     val retrieveReposUseCase:RetrieveUserReposUseCase = RetrieveUserReposUseCaseImpl()
 
@@ -40,7 +40,7 @@ class MainActivityPresenterImpl(mainActivity: MainActivity):MainActivityContract
         val boundary = this
 
         Thread {
-            retrieveReposUseCase.run(constantUser, dataInteractor, boundary)
+            retrieveReposUseCase.run(constantUser, backendInteractor, boundary, databaseInteractor)
         }.start()
     }
 

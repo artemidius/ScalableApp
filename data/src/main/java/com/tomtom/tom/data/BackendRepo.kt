@@ -7,16 +7,14 @@ import com.tomtom.tom.domain.Interactor
 import com.tomtom.tom.domain.model.RepoDomainModel
 import java.net.URL
 
-class BackendRepo : Interactor.Data {
+class BackendRepo : Interactor.Backend {
 
     val tag = this.javaClass.simpleName
 
-    override fun retrieveRepos(name: String): List<RepoDomainModel> {
+    override fun downloadRepos(name: String): List<RepoDomainModel>? {
         val json = URL(getReposUrl(name)).readText()
         val repositories: List<RepoDTO> = Gson().fromJson(json, Array<RepoDTO>::class.java).toList()
-        val rrrr = Mappper().listRepoDTOtoDomain(repositories)
-        return rrrr
-
+        return Mappper().listRepoDTOtoDomain(repositories)
     }
 
     private fun getReposUrl(userName: String): String = "https://api.github.com/users/$userName/repos"

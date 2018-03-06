@@ -2,13 +2,27 @@ package com.tomtom.tom.data
 
 import com.tomtom.tom.data.model.CommitRealmModel
 import com.tomtom.tom.data.model.RepoRealmModel
+import com.tomtom.tom.domain.Interactor
 import com.tomtom.tom.domain.model.RepoDomainModel
 import io.realm.Realm
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
 
-class RealmRepo {
+class RealmRepo:Interactor.DataBase {
+
     val realm = Realm.getDefaultInstance()
+
+    override fun saveRepos(list: List<RepoDomainModel>?) {
+        if (list != null) {
+            for (repo in list) {
+                saveRepository(repo)
+            }
+        }
+    }
+
+    override fun readAllRepos(): List<RepoDomainModel> = readAllRepos()
+
+    override fun deleteAllRepos() = deleteAll()
 
     fun saveRepository(inputRepository: RepoDomainModel) {
         realm.executeTransaction {
@@ -30,7 +44,7 @@ class RealmRepo {
         return realm.where<RepoRealmModel>().findAll()
     }
 
-    fun deleteAllRepos () {
+    fun deleteAll () {
         realm.executeTransaction{
             realm.deleteAll()
         }
