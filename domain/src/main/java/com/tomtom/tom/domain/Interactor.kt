@@ -16,6 +16,7 @@ interface Interactor {
         fun saveRepos(list:List<RepoDomainModel>?)
         fun readAllRepos():List<RepoDomainModel>
         fun deleteAllRepos()
+        fun closeRealm()
     }
 
 }

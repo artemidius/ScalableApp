@@ -32,7 +32,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     override fun updateScreen(list: List<RepoDomainModel>) {
         runOnUiThread({
-            Log.d(tag, "Presenter triggered updateScreen")
+            Log.d(tag, "Presenter triggered updateScreen with ${list.size} repos")
             recyclerView.adapter = ReposAdapter(list, this)
         })
     }

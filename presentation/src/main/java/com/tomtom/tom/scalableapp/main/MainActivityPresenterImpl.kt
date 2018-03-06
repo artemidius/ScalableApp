@@ -10,36 +10,27 @@ import com.tomtom.tom.domain.model.RepoDomainModel
 
 class MainActivityPresenterImpl(mainActivity: MainActivity):MainActivityContract.Presenter, Interactor.Presentation {
 
-    override fun onRepositoriesRetrieved(repos: List<RepoDomainModel>) {
-        Log.d(tag, "Retrieved ${repos.size} repos")
-        for (repo in repos) {
-            Log.d(tag, "ID: ${repo.id}; Name: ${repo.name}")
-        }
-        view.updateScreen(repos)
-
-        val realmRepo = RealmRepo()
-        realmRepo.deleteAllRepos()
-
-        for (repo in repos) {
-            realmRepo.saveRepository(repo)
-        }
-
-        Log.d(tag, "We have ${realmRepo.getAllRepos()!!.size} repos in DB")
-    }
 
     val tag = this.javaClass.simpleName
     val constantUser = "mralexgray"
     val view:MainActivityContract.View = mainActivity
-    val backendInteractor:Interactor.Backend = BackendRepo()
-    val databaseInteractor: Interactor.DataBase = RealmRepo()
+
 
     val retrieveReposUseCase:RetrieveUserReposUseCase = RetrieveUserReposUseCaseImpl()
+
+
+    override fun onRepositoriesRetrieved(repos: List<RepoDomainModel>) {
+        Log.d(tag, "Retrieved ${repos.size} repos")
+        view.updateScreen(repos)
+    }
 
     override fun onResume()   {
         Log.d(tag, "Activity triggered onResume()")
         val boundary = this
 
         Thread {
+            val backendInteractor:Interactor.Backend = BackendRepo()
+            val databaseInteractor: Interactor.DataBase = RealmRepo()
             retrieveReposUseCase.run(constantUser, backendInteractor, boundary, databaseInteractor)
         }.start()
     }
