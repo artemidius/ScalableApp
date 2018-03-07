@@ -9,9 +9,10 @@ import com.tomtom.tom.domain.model.CommitDomainModel
 import com.tomtom.tom.domain.model.RepoDomainModel
 import com.tomtom.tom.scalableapp.R
 import kotlinx.android.synthetic.main.item_repo.view.*
+import android.support.v7.util.DiffUtil
 
 
-class ReposAdapter(val repos: List<RepoDomainModel>, val context: Context) : RecyclerView.Adapter<ReposAdapter.ViewHolder>() {
+class ReposAdapter(var repos: List<RepoDomainModel>, val context: Context) : RecyclerView.Adapter<ReposAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_repo, parent, false)
@@ -33,4 +34,9 @@ class ReposAdapter(val repos: List<RepoDomainModel>, val context: Context) : Rec
     override fun getItemCount(): Int = repos.size
 
     class ViewHolder(val textView: View) : RecyclerView.ViewHolder(textView)
+
+    fun updateList(newList: List<RepoDomainModel>) {
+        repos = newList
+        notifyDataSetChanged()
+    }
 }

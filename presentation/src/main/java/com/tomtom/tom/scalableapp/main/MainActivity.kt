@@ -13,6 +13,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
 
     val tag = this.javaClass.simpleName
     lateinit var recyclerView: RecyclerView
+    lateinit var adapter:ReposAdapter
 
 
     lateinit var presenter:MainActivityContract.Presenter
@@ -28,12 +29,14 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
     private fun initRecycler() {
         recyclerView = findViewById(R.id.recycler_main)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = ReposAdapter(emptyList(), this)
+        recyclerView.adapter = adapter
     }
 
     override fun updateScreen(list: List<RepoDomainModel>) {
         runOnUiThread({
             Log.d(tag, "Presenter triggered updateScreen with ${list.size} repos")
-            recyclerView.adapter = ReposAdapter(list, this)
+            adapter.updateList(list)
         })
     }
 
