@@ -32,3 +32,14 @@ Add a Data Persistency Layer to store the Repository Information. Do not store t
 Once this layer is there, change the app behavior in a way that the app first shows the content stored on
 the phone and then requests Github for new data. Subsequently, that data is updated in the persistency
 layer.
+
+### ARCHITECTURE
+
+App is made followind Uncle Bob's ideas about clean architecture
+
+
+Article: https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html
+
+Video: https://www.youtube.com/watch?v=Nsjsiz2A9mg
+
+Article: https://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/
