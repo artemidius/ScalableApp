@@ -26,7 +26,17 @@ class ReposAdapter(var repos: List<RepoDomainModel>, val context: Context) : Rec
 
         if (holder != null) {
             holder.textView.repo_name.text = repo.name
-            if (lastCommit != null) holder.textView.last_comit.text = lastCommit.date
+            if (lastCommit != null) {
+                holder.textView.by.visibility = View.VISIBLE
+                holder.textView.author.visibility = View.VISIBLE
+                holder.textView.author.text = lastCommit.author
+                holder.textView.on.visibility = View.VISIBLE
+                holder.textView.date.visibility = View.VISIBLE
+                holder.textView.spinner.visibility = View.GONE
+                val date = lastCommit.date?:""
+                holder.textView.date.text = date.substring(0..9)
+
+            }
         }
 
     }

@@ -2,7 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/gray_scalable_greeny"
+    android:paddingLeft="16dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    >
 
     <TextView
         android:id="@+id/repo_name"
@@ -10,19 +15,81 @@
         android:layout_height="wrap_content"
         android:text="Name"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textColor="@color/gray_100"/>
 
-    <TextView
-        android:id="@+id/last_comit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Last comit"
-        android:textSize="16sp" />
-
-    <View
-        android:id="@+id/separ"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray_300" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last comit"
+            android:layout_marginRight="4sp"
+            android:textSize="16sp"
+            android:textColor="@color/gray_200"/>
+
+        <TextView
+            android:id="@+id/by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="by"
+            android:layout_marginRight="4sp"
+            android:layout_marginLeft="4sp"
+            android:textSize="16sp"
+            android:textColor="@color/gray_200"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/author"
+            android:maxLength="12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Author"
+            android:textSize="16sp"
+            android:textColor="@color/gray_200"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="on"
+            android:layout_marginRight="4sp"
+            android:layout_marginLeft="4sp"
+            android:textSize="16sp"
+            android:textColor="@color/gray_200"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="16sp"
+            android:textColor="@color/gray_200"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right">
+            <ProgressBar
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                />
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
 
 </LinearLayout>

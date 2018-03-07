@@ -24,6 +24,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
         initRecycler()
         presenter = MainActivityPresenterImpl(this)
         presenter.onCreate()
+
     }
 
     private fun initRecycler() {
@@ -38,6 +39,10 @@ class MainActivity : BaseActivity(), MainActivityContract.View {
             Log.d(tag, "Presenter triggered updateScreen with ${list.size} repos")
             adapter.updateList(list)
         })
+    }
+
+    override fun updateTitle(t: String) {
+        title = t
     }
 
     override fun onResume() {

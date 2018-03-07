@@ -13,8 +13,10 @@ open class CommitDTO() {
                 val message: String? = null
 
                 open class Author() {
+                        @SerializedName("name")
+                        val name: String? = null
                         @SerializedName("date")
-                        val id: String? = null
+                        val date: String? = null
                 }
         }
 

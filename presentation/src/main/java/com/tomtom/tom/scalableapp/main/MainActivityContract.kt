@@ -7,6 +7,7 @@ interface MainActivityContract {
 
     interface View {
         fun updateScreen(list:List<RepoDomainModel>)
+        fun updateTitle(title:String)
     }
 
     interface Presenter : ActivityLifeCyclePresenter

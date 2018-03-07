@@ -1,5 +1,6 @@
 package com.tomtom.tom.data.model
 
+import com.tomtom.tom.domain.model.CommitDomainModel
 import com.tomtom.tom.domain.model.RepoDomainModel
 
 class Mappper {
@@ -18,8 +19,6 @@ class Mappper {
             lastCommit = null
     )
 
-
-
     fun snapshotToDomainList(inputList:List<RepoRealmModel>):List<RepoDomainModel> {
         val outputList = mutableListOf<RepoDomainModel>()
         for (repo in inputList) {
@@ -35,4 +34,10 @@ class Mappper {
         }
         return outputList
     }
+
+    fun commitDTOtoDomain(inputCommit:CommitDTO):CommitDomainModel = CommitDomainModel(
+            message = inputCommit.innerCommit?.message,
+            author = inputCommit.innerCommit?.author?.name,
+            date = inputCommit.innerCommit?.author?.date
+    )
 }
