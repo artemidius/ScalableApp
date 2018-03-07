@@ -1,6 +1,5 @@
 package com.tomtom.tom.data
 
-import android.util.Log
 import com.google.gson.Gson
 import com.tomtom.tom.data.model.CommitDTO
 import com.tomtom.tom.data.model.Mappper
@@ -8,7 +7,6 @@ import com.tomtom.tom.data.model.RepoDTO
 import com.tomtom.tom.domain.Interactor
 import com.tomtom.tom.domain.model.CommitDomainModel
 import com.tomtom.tom.domain.model.RepoDomainModel
-import java.io.FileNotFoundException
 import java.net.URL
 
 class BackendRepo : Interactor.Backend {
